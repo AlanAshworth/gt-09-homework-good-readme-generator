@@ -1,5 +1,6 @@
 var inquirer = require("inquirer");
 var axios = require("axios");
+var fs = require("fs");
 
 inquirer
   .prompt([
@@ -19,6 +20,9 @@ inquirer
       // console.log(userAvatar);
       getProjectInfo();
     });
+  })
+  .catch(error => {
+    console.log("Inquirer prompt error: ", error);
   });
 
 const getProjectInfo = () => {
@@ -48,10 +52,17 @@ const getProjectInfo = () => {
         type: "input",
         name: "projectContributors",
         message: "Who is contributing to this project?"
-      },
+      }
     ])
     .then(data => {
       console.log(data);
+
+      fs.writeFile("README.md", JSON.stringify(data), function(error) {
+        if (error) {
+          throw error;
+        }
+        console.log("saved data");
+      });
     })
     .catch(error => {
       console.log("Inquirer prompt error: ", error);
