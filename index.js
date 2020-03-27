@@ -1,7 +1,7 @@
-var inquirer = require("inquirer");
-var axios = require("axios");
-var fs = require("fs");
-var util = require("util");
+const inquirer = require("inquirer");
+const axios = require("axios");
+const fs = require("fs");
+const util = require("util");
 
 const writeFileAsync = util.promisify(fs.writeFile);
 
