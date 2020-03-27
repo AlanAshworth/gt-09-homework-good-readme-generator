@@ -45,7 +45,7 @@ const promptUserForProjectInfo = () => {
   ]);
 };
 
-function generateREADME({ projectTitle, projectDescription, projectLicense, projectContributors }) {
+function generateREADME({ projectTitle, projectDescription, projectUsage, projectLicense, projectContributors }, userLogin, userAvatar) {
   return `
   # ${projectTitle}
 
@@ -59,6 +59,7 @@ function generateREADME({ projectTitle, projectDescription, projectLicense, proj
   *[Usage](#usage)
   *[Credits](#credits)
   *[License](#license)
+  *[Contact](#contact)
 
   ## Installation
 
@@ -69,6 +70,8 @@ function generateREADME({ projectTitle, projectDescription, projectLicense, proj
   5. Once questions are successfully answered, a generated README.md will be created and placed in your projects directory.
 
   ## Usage
+
+  ${projectUsage}
 
   The following image demonstrates the application functionality:
 
@@ -81,11 +84,12 @@ function generateREADME({ projectTitle, projectDescription, projectLicense, proj
   ## License
 
   Licensed under the ${projectLicense} license.
-
-  ## Badges
-
   ![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)
-  ![GitHub followers](https://img.shields.io/github/followers/AlanAshworth?label=Follow&style=social)`;
+
+  ## Contact
+
+  ![GitHub avator](${userAvatar})
+  ![GitHub followers](https://img.shields.io/github/followers/${userLogin}?label=Follow&style=social)`;
 }
 
 promptUserForGitHubInfo()
@@ -94,11 +98,12 @@ promptUserForGitHubInfo()
 
     axios.get(queryUrl).then(function(response) {
       // const userEmail = response.data.email;
+      const userLogin = response.data.login;
       const userAvatar = response.data.avatar_url;
 
       promptUserForProjectInfo()
         .then(data => {
-          const readme = generateREADME(data);
+          const readme = generateREADME(data, userLogin, userAvatar);
           return writeFileAsync("generatedREADME.md", readme);
           
         }).then(function() {console.log("GENERATE-READMe.md created successfully.");} )
