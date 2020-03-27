@@ -1,0 +1,24 @@
+{
+  "name": "GT-Homework-09-Good-README-Generator",
+  "version": "1.0.0",
+  "description": "Homework assignment, due 3/26/2020. Create a command-line application that dynamically generates a README.md from a user's input.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlanAshworth/GT-Homework-09-Good-README-Generator.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlanAshworth/GT-Homework-09-Good-README-Generator/issues"
+  },
+  "homepage": "https://github.com/AlanAshworth/GT-Homework-09-Good-README-Generator#readme",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "inquirer": "^7.1.0"
+  }
+}
