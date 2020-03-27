@@ -58,9 +58,9 @@ function generateREADME({ projectTitle, projectDescription, projectUsage, projec
 
   *[Installation](#installation)
   *[Usage](#usage)
-  *[Credits](#credits)
+  *[Contributing](#contributing)
   *[License](#license)
-  *[Contact](#contact)
+  *[Questions](#questions)
 
   ## Installation
 
@@ -74,20 +74,16 @@ function generateREADME({ projectTitle, projectDescription, projectUsage, projec
 
   ${projectUsage}
 
-  The following image demonstrates the application functionality:
+  ## Contributing
 
-  ![readme generator demo](./Assets/readme-generator-demo.gif)
-
-  ## Credits
-
-  * ${projectContributors}
+  ${projectContributors}
 
   ## License
 
   Licensed under the ${projectLicense} license.
   ${userLicense}
 
-  ## Contact
+  ## Questions
 
   ![GitHub avator](${userAvatar})
   ![GitHub followers](https://img.shields.io/github/followers/${userLogin}?label=Follow&style=social)`;
@@ -108,15 +104,12 @@ promptUserForGitHubInfo()
           let userLicense = '';
           switch(data.projectLicense) {
             case "GPL v3":
-              // code block
               userLicense = '![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)';
               break;
             case "AGPL":
-              // code block
               userLicense = '![AGPL License](https://img.shields.io/badge/license-AGPL-blue.svg)';
               break;
             default:
-              // code block
               userLicense = '![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)';
           }
 
