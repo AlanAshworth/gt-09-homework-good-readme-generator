@@ -33,19 +33,20 @@ const promptUserForProjectInfo = () => {
       message: "How will this project be used?"
     },
     {
-      type: "input",
+      type: "list",
       name: "projectLicense",
-      message: "Under what license with this project be protected?"
+      message: "Under what license will this project be protected?",
+      choices: ["MIT", "GPL v3", "AGPL"]
     },
     {
       type: "input",
       name: "projectContributors",
-      message: "Who is contributing to this project?"
+      message: "Who is contributing to this project (separate by commas)?"
     }
   ]);
 };
 
-function generateREADME({ projectTitle, projectDescription, projectUsage, projectLicense, projectContributors }, userLogin, userAvatar) {
+function generateREADME({ projectTitle, projectDescription, projectUsage, projectLicense, projectContributors }, userLogin, userAvatar, userLicense) {
   return `
   # ${projectTitle}
 
@@ -84,7 +85,7 @@ function generateREADME({ projectTitle, projectDescription, projectUsage, projec
   ## License
 
   Licensed under the ${projectLicense} license.
-  ![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)
+  ${userLicense}
 
   ## Contact
 
@@ -103,7 +104,23 @@ promptUserForGitHubInfo()
 
       promptUserForProjectInfo()
         .then(data => {
-          const readme = generateREADME(data, userLogin, userAvatar);
+
+          let userLicense = '';
+          switch(data.projectLicense) {
+            case "GPL v3":
+              // code block
+              userLicense = '![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)';
+              break;
+            case "AGPL":
+              // code block
+              userLicense = '![AGPL License](https://img.shields.io/badge/license-AGPL-blue.svg)';
+              break;
+            default:
+              // code block
+              userLicense = '![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)';
+          }
+
+          const readme = generateREADME(data, userLogin, userAvatar, userLicense);
           return writeFileAsync("generatedREADME.md", readme);
           
         }).then(function() {console.log("GENERATE-READMe.md created successfully.");} )
