@@ -25,12 +25,12 @@ The README will be populated with the following:
 
 ## Table of Contents
 
-*[Installation](#installation)
-*[Usage](#usage)
-*[Site](#site)
-*[Repository](#repository)
-*[Questions](#questions)
-*[License](#license)
+* [Installation](#installation)
+* [Usage](#usage)
+* [Site](#site)
+* [Repository](#repository)
+* [Questions](#questions)
+* [License](#license)
 
 ## Installation
 
@@ -59,6 +59,7 @@ https://github.com/AlanAshworth/GT-Homework-09-Good-README-Generator
 ## Questions
 
 ![GitHub avator](https://avatars3.githubusercontent.com/u/54105679?v=4)
+
 ![GitHub followers](https://img.shields.io/github/followers/AlanAshworth?label=Follow&style=social)
 
 ## License
