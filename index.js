@@ -3,7 +3,7 @@ var axios = require("axios");
 var fs = require("fs");
 var util = require("util");
 
-// const writeFileAsync = util.promisify(fs.writeFile);
+const writeFileAsync = util.promisify(fs.writeFile);
 
 const promptUserForGitHubInfo = () => {
   return inquirer.prompt([
@@ -45,26 +45,63 @@ const promptUserForProjectInfo = () => {
   ]);
 };
 
+function generateREADME({ projectTitle, projectDescription, projectLicense, projectContributors }) {
+  return `
+  # ${projectTitle}
+
+  ## Description
+
+  ${projectDescription}
+
+  ## Table of Contents
+
+  *[Installation](#installation)
+  *[Usage](#usage)
+  *[Credits](#credits)
+  *[License](#license)
+
+  ## Installation
+
+  1. Include the package folder within your project directory.
+  2. Open your terminal to your current project directory.
+  3. Within your project directory, in the console type 'node index.js'
+  4. Prompts with ask for your GitHub username and questions about your project.
+  5. Once questions are successfully answered, a generated README.md will be created and placed in your projects directory.
+
+  ## Usage
+
+  The following image demonstrates the application functionality:
+
+  ![readme generator demo](./Assets/readme-generator-demo.gif)
+
+  ## Credits
+
+  * ${projectContributors}
+
+  ## License
+
+  Licensed under the ${projectLicense} license.
+
+  ## Badges
+
+  ![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)
+  ![GitHub followers](https://img.shields.io/github/followers/AlanAshworth?label=Follow&style=social)`;
+}
+
 promptUserForGitHubInfo()
   .then(function({ username }) {
     const queryUrl = `https://api.github.com/users/${username}`;
 
     axios.get(queryUrl).then(function(response) {
-      const userEmail = response.data.email;
+      // const userEmail = response.data.email;
       const userAvatar = response.data.avatar_url;
+
       promptUserForProjectInfo()
         .then(data => {
-          console.log(data);
-
-          fs.writeFile("GENERATE-README.md", JSON.stringify(data), function(
-            error
-          ) {
-            if (error) {
-              throw error;
-            }
-            console.log("saved data");
-          });
-        })
+          const readme = generateREADME(data);
+          return writeFileAsync("generatedREADME.md", readme);
+          
+        }).then(function() {console.log("GENERATE-READMe.md created successfully.");} )
         .catch(error => {
           console.log("Inquirer prompt error: ", error);
         });
