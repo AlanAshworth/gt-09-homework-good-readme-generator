@@ -46,7 +46,7 @@ const promptUserForProjectInfo = () => {
   ]);
 };
 
-function generateREADME({ projectTitle, projectDescription, projectUsage, projectLicense, projectContributors }, userLogin, userAvatar, userLicense) {
+const generateREADME = ({ projectTitle, projectDescription, projectUsage, projectLicense, projectContributors }, userLogin, userAvatar, userLicense) => {
   return `
   # ${projectTitle}
 
@@ -56,11 +56,11 @@ function generateREADME({ projectTitle, projectDescription, projectUsage, projec
 
   ## Table of Contents
 
-  *[Installation](#installation)
-  *[Usage](#usage)
-  *[Contributing](#contributing)
-  *[License](#license)
-  *[Questions](#questions)
+  * [Installation](#installation)
+  * [Usage](#usage)
+  * [Contributing](#contributing)
+  * [License](#license)
+  * [Questions](#questions)
 
   ## Installation
 
@@ -87,7 +87,7 @@ function generateREADME({ projectTitle, projectDescription, projectUsage, projec
 
   ![GitHub avator](${userAvatar})
   ![GitHub followers](https://img.shields.io/github/followers/${userLogin}?label=Follow&style=social)`;
-}
+};
 
 promptUserForGitHubInfo()
   .then(function({ username }) {
@@ -116,7 +116,7 @@ promptUserForGitHubInfo()
           const readme = generateREADME(data, userLogin, userAvatar, userLicense);
           return writeFileAsync("generatedREADME.md", readme);
           
-        }).then(function() {console.log("GENERATE-READMe.md created successfully.");} )
+        }).then(function() {console.log("GENERATE-README.md created successfully.");} )
         .catch(error => {
           console.log("Inquirer prompt error: ", error);
         });
